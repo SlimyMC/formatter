@@ -1,40 +1,32 @@
-spotless {
-    lineEndings = com.diffplug.spotless.LineEnding.UNIX
+plugins {
+    java
+    `kotlin-dsl`
+    `maven-publish`
+}
 
-    format("encoding") {
-        target("*.*")
-        encoding("UTF-8")
-        endWithNewline()
-        trimTrailingWhitespace()
+group = "net.slimymc"
+
+repositories {
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:6.22.0")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
     }
+}
 
-    yaml {
-        target(
-            ".github/**/*.yml",
-            ".github/**/*.yaml",
-        )
-        endWithNewline()
-        trimTrailingWhitespace()
-        jackson()
-            .yamlFeature("LITERAL_BLOCK_STYLE", true)
-            .yamlFeature("MINIMIZE_QUOTES", true)
-            .yamlFeature("SPLIT_LINES", false)
-    }
-
-    kotlinGradle {
-        target("**/*.gradle.kts")
-        endWithNewline()
-        trimTrailingWhitespace()
-        diktat()
-    }
-
-    java {
-        target("**/src/**/java/**/*.java")
-        importOrder()
-        removeUnusedImports()
-        indentWithSpaces(2)
-        endWithNewline()
-        trimTrailingWhitespace()
-        eclipse().configFile("eclipse-prefs.xml")
+gradlePlugin {
+    plugins {
+        create("formatter") {
+            id = "net.slimymc.formatter"
+            implementationClass = "net.slimymc.formatter.FormatterPlugin"
+        }
     }
 }
