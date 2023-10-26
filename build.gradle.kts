@@ -1,11 +1,3 @@
-plugins {
-    alias(libs.plugins.spotless)
-}
-
-repositories {
-    mavenCentral()
-}
-
 spotless {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
 
