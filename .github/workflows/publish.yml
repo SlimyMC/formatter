@@ -25,9 +25,11 @@ jobs:
       - name: Git Email
         run: git config --global user.email "github@slimymc.net"
       - name: Publish to GitHub Packages
-        uses: gradle/gradle-build-action@2.9.0
+        uses: gradle/gradle-build-action@v2
         with:
-          arguments: publish
+          arguments: |
+            publish
+            -Pversion="${{ github.event.release.name }}"
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
