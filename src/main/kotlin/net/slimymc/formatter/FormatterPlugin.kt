@@ -4,9 +4,7 @@ import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import java.io.File
 import java.io.FileNotFoundException
-import java.nio.file.Files
 
 class FormatterPlugin : Plugin<Project> {
     override fun apply(target: Project) {
