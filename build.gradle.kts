@@ -16,15 +16,10 @@ dependencies {
 }
 
 gradlePlugin {
-    website.set("https://github.com/SlimyMC/formatter")
-    vcsUrl.set("https://github.com/SlimyMC/formatter")
     plugins {
         create("formatter") {
             id = "net.slimymc.formatter"
             implementationClass = "net.slimymc.formatter.FormatterPlugin"
-            displayName = "Formatter Plugin"
-            description = "Formatter plugin to configure spotless easily."
-            tags.set(listOf("formatter"))
         }
     }
 }
