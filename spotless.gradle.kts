@@ -40,7 +40,7 @@ spotless {
         endWithNewline()
         trimTrailingWhitespace()
 
-        val url = "https://raw.githubusercontent.com/SlimyMC/formatter/fix/url/eclipse-prefs.xml"
+        val url = "https://raw.githubusercontent.com/SlimyMC/formatter/main/eclipse-prefs.xml"
         val localFilePath = project.layout.projectDirectory
             .dir(".gradle/caches/formatter")
             .file("eclipse-prefs.xml")
