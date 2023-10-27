@@ -1,5 +1,7 @@
 apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
 
+println("----------")
+
 spotless {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
 
