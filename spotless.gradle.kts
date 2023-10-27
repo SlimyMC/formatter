@@ -2,7 +2,7 @@ apply {
     plugin("com.diffplug.spotless")
 }
 
-spotless {
+extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
 
     format("encoding") {
