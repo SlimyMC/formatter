@@ -1,6 +1,4 @@
-plugins {
-    alias(libs.plugins.spotless)
-}
+apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
 
 spotless {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
