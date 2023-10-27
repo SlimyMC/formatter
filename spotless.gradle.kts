@@ -1,3 +1,5 @@
+apply("com.diffplug.spotless")
+
 spotless {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
 
