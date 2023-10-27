@@ -1,3 +1,5 @@
+import java.net.URL
+
 apply {
     plugin("com.diffplug.spotless")
 }
