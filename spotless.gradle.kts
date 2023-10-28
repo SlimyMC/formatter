@@ -1,8 +1,16 @@
 import java.net.URL
 
-apply {
-    plugin("com.diffplug.spotless")
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:6.22.0")
+    }
 }
+
+apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
 
 extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
@@ -31,7 +39,7 @@ extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         target("**/*.gradle.kts")
         endWithNewline()
         trimTrailingWhitespace()
-        //diktat()
+        diktat()
     }
 
     java {
