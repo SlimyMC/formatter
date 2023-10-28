@@ -12,6 +12,24 @@ buildscript {
 
 apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
 
+repositories {
+    mavenCentral()
+}
+
+val eclipsePrefsUrl = "https://raw.githubusercontent.com/SlimyMC/formatter/main/eclipse-prefs.xml"
+val eclipsePrefsPath = project.layout.projectDirectory
+    .dir(".gradle/caches/formatter")
+    .file("eclipse-prefs.xml")
+    .asFile
+val eclipsePrefsConnection = URL(eclipsePrefsUrl).openConnection()
+eclipsePrefsConnection.connect()
+eclipsePrefsConnection.getInputStream().use { inputStream ->
+    eclipsePrefsPath.parentFile?.mkdirs()
+    eclipsePrefsPath.outputStream().use { outputStream ->
+        inputStream.copyTo(outputStream)
+    }
+}
+
 extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
 
@@ -50,20 +68,6 @@ extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         endWithNewline()
         trimTrailingWhitespace()
 
-        val url = "https://raw.githubusercontent.com/SlimyMC/formatter/main/eclipse-prefs.xml"
-        val localFilePath = project.layout.projectDirectory
-            .dir(".gradle/caches/formatter")
-            .file("eclipse-prefs.xml")
-            .asFile
-        val urlConnection = URL(url).openConnection()
-        urlConnection.connect()
-        urlConnection.getInputStream().use { inputStream ->
-            localFilePath.parentFile?.mkdirs()
-            localFilePath.outputStream().use { outputStream ->
-                inputStream.copyTo(outputStream)
-            }
-        }
-
-        eclipse().configFile(localFilePath)
+        eclipse().configFile(eclipsePrefsPath)
     }
 }
