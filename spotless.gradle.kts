@@ -30,6 +30,12 @@ eclipsePrefsConnection.getInputStream().use { inputStream ->
     }
 }
 
+val prettierConfig =
+    mapOf(
+        "prettier" to "3.0.3",
+        "prettier-plugin-toml" to "1.0.0",
+    )
+
 extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     lineEndings = com.diffplug.spotless.LineEnding.UNIX
 
@@ -58,6 +64,21 @@ extensions.configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         endWithNewline()
         trimTrailingWhitespace()
         diktat()
+    }
+
+    format("toml") {
+        target("gradle/libs.versions.toml")
+        encoding("UTF-8")
+        endWithNewline()
+        trimTrailingWhitespace()
+        prettier(prettierConfig)
+            .config(
+                mapOf(
+                    "parser" to "toml",
+                    "plugins" to listOf("prettier-plugin-toml"),
+                ),
+            )
+
     }
 
     java {
